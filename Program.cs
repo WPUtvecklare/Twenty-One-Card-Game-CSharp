@@ -8,10 +8,16 @@ namespace ab224qr_examination_3
         {
             var deck = new Deck();
             deck.GenerateDeck();
-            for (int i = 0; i < deck.cards.Count; i++)
-            {
-                System.Console.WriteLine(deck.cards[i].GetName());
-            }
+            deck.Shuffle();
+            // for (int i = 0; i < 2; i++)
+            // {
+            //     System.Console.WriteLine(deck.DrawCard().GetValues());
+            // }
+
+            var player = new Player();
+            player.AddCard(deck.DrawCard());
+            player.AddCard(deck.DrawCard());
+            System.Console.WriteLine(player.SumOfHand());
         }
     }
 }

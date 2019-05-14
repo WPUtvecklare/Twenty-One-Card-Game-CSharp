@@ -22,12 +22,17 @@ namespace ab224qr_examination_3
 
         public void Shuffle () {
             Random r = new Random();
-            for (int i = 0; i < 1000; i++)
+            var deckCount = cards.Count();
+            Card tempValue;
+            int randomIndex;
+
+            while (deckCount != 0)
             {
-                int ix = r.Next(cards.Count);
-                Card c = cards.ElementAt(ix);
-                cards.RemoveAt(ix);
-                cards.Add(c);
+                randomIndex = r.Next(deckCount);
+                deckCount -= 1;
+                tempValue = cards[deckCount];
+                cards[deckCount] = cards[randomIndex];
+                cards[randomIndex] = tempValue;
             }
         }
 

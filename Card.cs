@@ -28,5 +28,10 @@ namespace ab224qr_examination_3
         {
             return _name;
         }
+
+        public string GetValues ()
+        {
+            return $"{_suit} {_name}";
+        }
     }
 }
