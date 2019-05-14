@@ -6,7 +6,12 @@ namespace ab224qr_examination_3
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var deck = new Deck();
+            deck.GenerateDeck();
+            for (int i = 0; i < deck.cards.Count; i++)
+            {
+                System.Console.WriteLine(deck.cards[i].GetName());
+            }
         }
     }
 }
