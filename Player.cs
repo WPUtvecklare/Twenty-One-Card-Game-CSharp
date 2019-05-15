@@ -1,36 +1,40 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ab224qr_examination_3
 {
     class Player
     {
-        List<Card> hand = new List<Card>();
+        private List<Card> _hand = new List<Card>();
+        public int Sum {
+            get {
+                var sum = _hand.Sum(c => c.Value);
+                if (sum > 21) 
+                {
+                    var count = _hand.Count(v => v.Rank == Rank.Ace);
+                    while (sum > 21 && count-- > 0)
+                    {
+                        sum-= 13;
+                    }
+                }
+                return sum;
+            }
+        }
+        private int Limit { get; }
+        public string Name { get; }
+        public IEnumerable<string> ShowHand { get => _hand.Select(c => c.ToString()); }
+        public bool ShouldAcceptCard { get => Sum < Limit ? true : false; }
 
-        public void AddCard (Card card)
+        public Player (string name = "Player", int limit = 15)
         {
-            hand.Add(card);
+            Name = name;
+            Limit = limit;
         }
 
-        public int SumOfHand ()
+        public void TakeCard (Card card)
         {
-            int sum = 0;
-            for (int i = 0; i < hand.Count; i++)
-            {
-                sum += (int)hand[i].GetName() + 2;
-                System.Console.WriteLine(hand[i].GetName());
-                System.Console.WriteLine((int)hand[i].GetName() + 2);
-            }
-
-            for (int i = 0; i < hand.Count; i++)
-            {
-                if (hand[i].GetName() == Card.Name.Ace)
-                {
-                    System.Console.WriteLine("Found an Ace"); // Working!
-                }
-            }
-
-            return sum;
+            _hand.Add(card);
         }
     }
 }
