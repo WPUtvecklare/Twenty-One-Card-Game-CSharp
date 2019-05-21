@@ -36,8 +36,8 @@ namespace ab224qr_examination_3
             }
         }
         public Card DrawCard () {
-            Card c = cards.ElementAt(0);
-            cards.RemoveAt(0);
+            Card c = cards.First();
+            cards.Remove(c);
             return c;
         }
     }
