@@ -23,7 +23,7 @@ namespace ab224qr_examination_3
 
         public override string ToString () 
         {
-            return $" {Value}{(char)Suit}";
+            return $" {(Value > 1 & Value < 11 ? Value.ToString() : Rank.ToString().Substring(0, 1))}{(char)Suit}";
         }
     }
 }
