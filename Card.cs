@@ -17,8 +17,8 @@ namespace ab224qr_examination_3
 
         public Card (Rank rank, Suit suit)
         {
-            Rank = rank;
-            Suit = suit;
+            Rank = Enum.IsDefined(typeof(Rank), rank) ? rank : throw new ArgumentException(nameof(rank));
+            Suit = Enum.IsDefined(typeof(Suit), suit) ? suit : throw new ArgumentException(nameof(suit));
         }
 
         public override string ToString () 

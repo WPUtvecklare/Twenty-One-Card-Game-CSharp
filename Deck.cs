@@ -9,7 +9,7 @@ namespace ab224qr_examination_3
         public List<Card> cards;
 
         public void GenerateDeck () {
-            cards = new List<Card>();
+            cards = new List<Card>(52);
 
             foreach (var suit in (Suit[]) Enum.GetValues(typeof(Suit)))
             {
