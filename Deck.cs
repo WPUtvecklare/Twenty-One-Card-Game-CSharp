@@ -4,25 +4,48 @@ using System.Linq;
 
 namespace ab224qr_examination_3
 {
+    /// <summary>
+    /// Representing a deck of cards
+    /// </summary>
     class Deck
     {
-        public List<Card> cards;
+        /// <summary>
+        /// Represents a list object containing cards
+        /// </summary>
+        /// <typeparam name="Card">Card</typeparam>
+        /// <returns>Cards</returns>
+        private List<Card> _cards = new List<Card>();
 
-        public void GenerateDeck () {
-            cards = new List<Card>(52);
+        /// <summary>
+        /// Preventing the card list to be manipulated
+        /// </summary>
+        /// <returns>A readonly list containing the cards</returns>
+        public IReadOnlyList<Card> Cards => _cards.AsReadOnly();
 
-            foreach (var suit in (Suit[]) Enum.GetValues(typeof(Suit)))
+        /// <summary>
+        /// Loops through and creates cards from the available different values, 
+        /// then adds it to the cards list
+        /// </summary>
+        public void GenerateDeck()
+        {
+            _cards = new List<Card>(52);
+
+            foreach (var suit in (Suit[])Enum.GetValues(typeof(Suit)))
             {
-                foreach (var rank in (Rank[]) Enum.GetValues(typeof(Rank)))
+                foreach (var rank in (Rank[])Enum.GetValues(typeof(Rank)))
                 {
-                    cards.Add(new Card(rank, suit));
+                    _cards.Add(new Card(rank, suit));
                 }
             }
         }
 
-        public void Shuffle () {
+        /// <summary>
+        /// Shuffles the card list
+        /// </summary>
+        public void Shuffle()
+        {
             Random r = new Random();
-            var deckCount = cards.Count();
+            var deckCount = _cards.Count();
             Card tempValue;
             int randomIndex;
 
@@ -30,15 +53,10 @@ namespace ab224qr_examination_3
             {
                 randomIndex = r.Next(deckCount);
                 deckCount -= 1;
-                tempValue = cards[deckCount];
-                cards[deckCount] = cards[randomIndex];
-                cards[randomIndex] = tempValue;
+                tempValue = _cards[deckCount];
+                _cards[deckCount] = _cards[randomIndex];
+                _cards[randomIndex] = tempValue;
             }
-        }
-        public Card DrawCard () {
-            Card c = cards.First();
-            cards.Remove(c);
-            return c;
         }
     }
 }

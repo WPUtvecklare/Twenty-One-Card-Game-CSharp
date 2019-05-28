@@ -2,35 +2,26 @@
 
 namespace ab224qr_examination_3
 {
+    /// <summary>
+    /// Program that initializes the card game 21
+    /// </summary>
     class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// The starting point of the application
+        /// </summary>
+        static void Main()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            var deck = new Deck();
-            deck.GenerateDeck();
-            deck.Shuffle();
-
-            var player = new Player("Hans", 15);
-            while (player.ShouldAcceptCard) player.TakeCard(deck.DrawCard());
-
-            System.Console.Write($"\n{player.Name}");
-            foreach (string card in player.ShowHand)
+            try
             {
-                System.Console.Write(card);
+                Game game = new Game(1);
+                game.StartGame();
             }
-            System.Console.Write($" ({player.Sum}) \n");
-
-
-            var dealer = new Dealer("Gummibjörn", 1);
-            while (dealer.ShouldAcceptCard) dealer.TakeCard(deck.DrawCard());
-
-            System.Console.Write($"\n{dealer.Name}");
-            foreach (var card in dealer.ShowHand)
+            catch (Exception e)
             {
-                System.Console.Write(card);
+                Console.WriteLine(e.Message);
             }
-            System.Console.Write($" ({dealer.Sum}) \n \n");
         }
     }
 }
